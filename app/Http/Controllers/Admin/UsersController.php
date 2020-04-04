@@ -50,14 +50,21 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(User $user, Request $request)
     {
         $user->roles()->sync($request->roles);
         
         $user->email = $request->email;
         $user->name = $request->name;
 
-        $user->save();
+        if($user->save())
+        {
+            $request->session()->flash('success', 'L\'utilisateur a bien été mis à jour ('.$user->name.')');
+        }
+        else
+        {
+            $request->session()->flash('error', 'Une erreur s\'est produite lors de la mise à jour de l\'utilisateur ('.$user->name.')');
+        }
         
         return redirect()->route('admin.users.index');
     }
@@ -68,10 +75,20 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user, Request $request)
     {
         $user->roles()->detach();
-        $user->delete();
+
+        $tmp_name = $user->name;
+
+        if($user->delete())
+        {
+            $request->session()->flash('success', 'L\'utilisateur a bien été supprimé ('.$tmp_name.')');
+        }
+        else
+        {
+            $request->session()->flash('error', 'Une erreur s\'est produite lors de la suppression de l\'utilisateur ('.$tmp_name.')');
+        }
 
         return redirect()->route('admin.users.index');
     }
