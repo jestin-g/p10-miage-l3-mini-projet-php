@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Gate;
 
 use App\User;
 use App\Role;
@@ -52,6 +53,11 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $user->roles()->sync($request->roles);
+        
+        $user->email = $request->email;
+        $user->name = $request->name;
+
+        $user->save();
         
         return redirect()->route('admin.users.index');
     }
