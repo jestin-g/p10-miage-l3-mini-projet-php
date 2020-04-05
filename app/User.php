@@ -37,10 +37,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    /**
+     * Get user's roles
+     * 
+     */
     public function roles()
     {
         return $this->belongsToMany('App\Role');
+    }
+
+    /**
+     * Get user's student dossier
+    */
+    public function student()
+    {
+        return $this->hasOne('App\Student');
     }
 
     public function hasAnyRoles($roles)
