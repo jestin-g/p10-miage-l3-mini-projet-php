@@ -54,6 +54,15 @@ class User extends Authenticatable
         return $this->hasOne('App\Student');
     }
 
+    public function hasStudent()
+    {
+        if ($this->student()) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function hasAnyRoles($roles)
     {
         if ($this->roles()->whereIn('name', $roles)->first())

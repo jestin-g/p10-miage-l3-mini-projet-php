@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Student;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 use App\Student;
+use App\User;
 
 class StudentsController extends Controller
 {
@@ -17,21 +19,28 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user();
+
         $student = Student::create([
             'name' => '',
             'surname' => '',
             'num_student_card' => '',
-            'birth_date' => '',
+            'birth_date' => Carbon::today(),
             'address' => '',
             'phone_number' => '',
-            'user_id' => $request->id
+            'user_id' => $user->id
         ]);
 
-        $user = User::find($request->id)->first();
+        if($student->save() && $user->student()->save($student))
+        {
+            $request->session()->flash('success', 'Votre profil  bien été créé, vous pouvez dès à présent renseigner vos informations dans la section \'Mon Profil\'');
+        }
+        else
+        {
+            $request->session()->flash('error', 'Une erreur s\'est produite lors de la création de votre profil');
+        }
 
-        $user->student()->attach($student);
-
-        return /* TODO */;
+        return view('home');
     }
 
     /**

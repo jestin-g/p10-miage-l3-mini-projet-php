@@ -26,6 +26,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
 });
 
-Route::namespace('Student')->prefix('student')->name('student.')->middleware('can:manage-students')->group(function() {
+Route::namespace('Student')->name('student.')->middleware('can:manage-students')->group(function() {
     Route::resource('/students', 'StudentsController', ['except' => ['index', 'create', 'show']]);
 });
