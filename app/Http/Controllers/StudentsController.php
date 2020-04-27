@@ -37,12 +37,12 @@ class StudentsController extends Controller
         $user = auth()->user();
 
         $student = Student::create([
-            'name' => '',
-            'surname' => '',
-            'num_student_card' => '',
-            'birth_date' => Carbon::today(),
-            'address' => '',
-            'phone_number' => '',
+            'name' => NULL,
+            'surname' => NULL,
+            'num_student_card' => NULL,
+            'birth_date' => NULL,
+            'address' => NULL,
+            'phone_number' => NULL,
             'user_id' => $user->id
         ]);
 
@@ -55,7 +55,7 @@ class StudentsController extends Controller
             $request->session()->flash('error', 'Une erreur s\'est produite lors de la création de votre profil');
         }
 
-        return view('home');
+        return redirect()->action('StudentsController@index');
     }
 
     /**
