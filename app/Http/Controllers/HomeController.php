@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Student;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -19,10 +21,17 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('home');
+        if(auth()->user()->hasRole('administrateur'))
+        {
+            $users = User::all();
+            return view('admin.users.index', compact('users'));
+        }
+        elseif (auth()->user()->hasRole('etudiant'))
+        {
+            return redirect()->action('StudentsController@index');
+        }
     }
 }
