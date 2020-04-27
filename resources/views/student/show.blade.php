@@ -6,7 +6,7 @@
             </div>
             @if(auth()->user()->student()->exists())
             <div class="col">
-                <form action="{{ route('student.students.edit', auth()->user()->student) }}" method="POST">
+                <form action="{{ route('students.edit', auth()->user()->student) }}" method="POST">
                     @csrf
                     @method('GET')
                     <button type="submit" class="btn btn-primary float-right">modifier</button>
@@ -20,7 +20,7 @@
 
         @else
         <td>
-            <form action="{{ route('student.students.store')}}" method="POST">
+            <form action="{{ route('students.store')}}" method="POST">
                 @csrf
                 @method('POST')
                 <button type="submit" class="btn btn-success">Créer mon profil étudiant</button>
