@@ -33,7 +33,7 @@
               </tr>
               <tr>
                 <th scope="row">Date de naissance</th>
-                <td>{{ $student->birth_date ?? 'à renseigner'}}</td>
+                <td>{{ \Carbon\Carbon::parse($student->birth_date)->translatedFormat('j F, Y') ?? 'à renseigner'}}</td>
               </tr>
               <tr>
                 <th scope="row">Adresse postale</th>
@@ -47,7 +47,7 @@
           </table>
         @else
         <td>
-            <form action="{{ route('students.store')}}" method="POST">
+            <form action="{{ route('students.init')}}" method="POST">
                 @csrf
                 @method('POST')
                 <button type="submit" class="btn btn-success">Créer mon profil étudiant</button>
