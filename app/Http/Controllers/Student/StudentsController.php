@@ -49,9 +49,15 @@ class StudentsController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit(Student $student, Request $request)
     {
-        //
+        if ($student == auth()->user()->student)
+        {
+            return view('student.edit', compact('student'));
+        }
+
+        $request->session()->flash('error', 'Vous ne pouvez accéder au profil de quelqu\'un d\'autre !');
+        
     }
 
     /**
