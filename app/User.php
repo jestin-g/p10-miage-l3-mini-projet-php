@@ -56,7 +56,8 @@ class User extends Authenticatable
 
     public function hasStudent()
     {
-        if ($this->student()) {
+        if ($this->student()->exists())
+        {
             return true;
         }
 
