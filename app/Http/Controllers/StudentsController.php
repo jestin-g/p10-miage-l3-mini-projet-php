@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 
 use App\Student;
 use App\User;
@@ -32,7 +31,7 @@ class StudentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function init(Request $request)
     {
         $user = auth()->user();
 
@@ -72,7 +71,7 @@ class StudentsController extends Controller
         }
 
         $request->session()->flash('error', 'Vous ne pouvez accéder au profil de quelqu\'un d\'autre !');
-        
+        return redirect()->action('StudentsController@index');
     }
 
     /**
@@ -84,7 +83,9 @@ class StudentsController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $student->update($request->all());
+
+        return redirect()->action('StudentsController@index');
     }
 
     /**
