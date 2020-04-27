@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,6 +11,21 @@ use App\User;
 
 class StudentsController extends Controller
 {
+
+    public function index()
+    {
+        $user = auth()->user();
+        if ($user->hasStudent())
+        {
+            $student = $user->student;
+            return view('student.index', compact('student'));
+        }
+        else
+        {
+            return view('student.index');
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
