@@ -5,6 +5,7 @@
     <div class="col-md-8">
         @can('manage-students')
             @include('student.show')
+            @include('student.dossier.show')
         @endcan
     </div>
 </div>
