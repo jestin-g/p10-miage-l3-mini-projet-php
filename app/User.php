@@ -56,12 +56,7 @@ class User extends Authenticatable
 
     public function hasStudent()
     {
-        if ($this->student()->exists())
-        {
-            return true;
-        }
-
-        return false;
+        return $this->student()->exists();
     }
 
     public function hasAnyRoles($roles)
