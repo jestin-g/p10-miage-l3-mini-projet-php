@@ -29,4 +29,5 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
 Route::name('')->middleware('can:manage-students')->group(function() {
     Route::resource('/students', 'StudentsController', ['except' => ['create', 'show']]);
     Route::post('students/init', 'StudentsController@init')->name('students.init');
+    Route::post('students/dossier/init', 'DossierController@init')->name('dossiers.init');
 });
