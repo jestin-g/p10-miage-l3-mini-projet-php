@@ -4,7 +4,7 @@
             <div class="col">
                 Mon profil
             </div>
-            @if(auth()->user()->student()->exists())
+            @if(auth()->user()->hasStudent())
             <div class="col">
                 <form action="{{ route('students.edit', auth()->user()->student) }}" method="POST">
                     @csrf
