@@ -17,11 +17,24 @@ class Student extends Model
     ];
 
     /**
-     * Get the student dossier's owner
+     * Get the student profile owner
      * 
      */
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Get the profile student dossier
+    */
+    public function dossier()
+    {
+        return $this->hasOne('App\Dossier');
+    }
+
+    public function hasDossier()
+    {
+        return $this->dossier()->exists();
     }
 }
