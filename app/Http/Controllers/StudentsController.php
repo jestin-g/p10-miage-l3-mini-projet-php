@@ -14,15 +14,22 @@ class StudentsController extends Controller
     public function index()
     {
         $user = auth()->user();
+
+        $data = array();
+
         if ($user->hasStudent())
         {
             $student = $user->student;
-            return view('student.index', compact('student'));
+            $data['student'] = $student;
+
+            if ($student->hasDossier())
+            {
+                $data['dossier'] = $student->dossier;
+            }
         }
-        else
-        {
-            return view('student.index');
-        }
+
+            return view('student.index', $data);
+
     }
 
     /**
@@ -45,14 +52,10 @@ class StudentsController extends Controller
             'user_id' => $user->id
         ]);
 
-        if($student->save() && $user->student()->save($student))
-        {
-            $request->session()->flash('success', 'Votre profil  bien été créé, vous pouvez dès à présent renseigner vos informations dans la section \'Mon Profil\'');
-        }
-        else
-        {
-            $request->session()->flash('error', 'Une erreur s\'est produite lors de la création de votre profil');
-        }
+        $student->save();
+        $user->student()->save($student);
+        
+        $request->session()->flash('success', 'Votre profil  bien été créé, vous pouvez dès à présent renseigner vos informations dans la section \'Mon Profil\'');
 
         return redirect()->action('StudentsController@index');
     }
