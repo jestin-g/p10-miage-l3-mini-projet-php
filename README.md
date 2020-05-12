@@ -1,4 +1,4 @@
-# Projet Système d’Information L3 APP 2019-2020 
+# Mini projet PHP L3 APP 2019-2020 
 
 Application web Laravel permettant de gérer les candidatures à des formations
 
