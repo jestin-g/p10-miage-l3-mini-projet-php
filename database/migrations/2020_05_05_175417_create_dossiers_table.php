@@ -14,6 +14,7 @@ class CreateDossiersTable extends Migration
     public function up()
     {
         Schema::create('dossiers', function (Blueprint $table) {
+            $table->id();
             $table->string('path_to_cv')->nullable();
             $table->string('path_to_cover_letter')->nullable();
             $table->string('path_to_transcript')->nullable();
