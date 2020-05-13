@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="card-body">
-        @if(auth()->user()->student()->exists())
+        @if(auth()->user()->hasStudent())
         <table class="table">
             <tbody>
               <tr>
