@@ -90,15 +90,4 @@ class StudentsController extends Controller
 
         return redirect()->action('StudentsController@index');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Student $student)
-    {
-        //
-    }
 }
