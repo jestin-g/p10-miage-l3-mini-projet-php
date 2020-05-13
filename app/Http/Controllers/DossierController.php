@@ -35,79 +35,20 @@ class DossierController extends Controller
         return redirect()->action('StudentsController@index');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function uploadFile(Request $request)
     {
-        //
-    }
+        $user = auth()->user();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        // Get file from request
+        $file = $request->file('file');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // Store file in the directory named by the user name
+        $path = $request->file('file')->store($user->name);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Dossier  $dossier
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Dossier $dossier)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Dossier  $dossier
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Dossier $dossier)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Dossier  $dossier
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Dossier $dossier)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Dossier  $dossier
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Dossier $dossier)
-    {
-        //
+        $dossier = Dossier::firstWhere('student_id', $user->student->id);
+        $dossier->path_to_cv = $path;
+        $dossier->save();
+    
+        return redirect()->action('StudentsController@index');
     }
 }
