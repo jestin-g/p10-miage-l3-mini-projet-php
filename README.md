@@ -15,7 +15,7 @@ Se placer dans le dossier créé
 
     cd mini-projet-php-l3-miage
 
-Installer les dépendances avec composer
+Installer les dépendances avec [Composer](https://getcomposer.org/)
 
     composer install
 
