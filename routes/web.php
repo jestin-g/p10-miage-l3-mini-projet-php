@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function ()
+{
     return view('welcome');
 });
 
@@ -21,13 +22,17 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function()
+{
     Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
 });
 
-Route::name('')->middleware('can:manage-students')->group(function() {
+Route::name('')->middleware('can:manage-students')->group(function()
+{
     Route::resource('/students', 'StudentsController', ['except' => ['create', 'show']]);
+
     Route::post('students/init', 'StudentsController@init')->name('students.init');
+
     Route::post('students/dossier/init', 'DossierController@init')->name('dossiers.init');
+    Route::post('students/dossier/upload', 'DossierController@uploadFile')->name('dossiers.uploadFile');
 });
