@@ -23,4 +23,5 @@ class Dossier extends Model
     {
         return $this->belongsTo('App\Student');
     }
+
 }
