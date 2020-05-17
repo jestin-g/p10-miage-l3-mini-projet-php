@@ -15,11 +15,11 @@ Se placer dans le dossier créé
 
     cd mini-projet-php-l3-miage
 
-Installer les dépendances avec composer
+Installer les dépendances avec [Composer](https://getcomposer.org/)
 
     composer install
 
-Copier le fichier env exemple et effectuer les changements requis dans le fichier copié
+Copier le fichier .env.exemple et effectuer les changements requis dans le fichier copié (connexion à votre de base de données)
 
     cp .env.example .env
 
