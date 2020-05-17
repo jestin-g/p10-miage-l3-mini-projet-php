@@ -17,7 +17,7 @@ class Student extends Model
     ];
 
     /**
-     * Get the student profile owner
+     * Get the profile student owner
      * 
      */
     public function user()
@@ -26,15 +26,28 @@ class Student extends Model
     }
 
     /**
-     * Get the profile student dossier
+     * Get the profile student's dossier
     */
     public function dossier()
     {
         return $this->hasOne('App\Dossier');
     }
 
+    /**
+     * Get the profile student's candidacy
+    */
+    public function candidacy()
+    {
+        return $this->hasOne('App\Candidacy');
+    }
+
     public function hasDossier()
     {
         return $this->dossier()->exists();
+    }
+
+    public function hasCandidacy()
+    {
+        return $this->candidacy()->exists();
     }
 }
