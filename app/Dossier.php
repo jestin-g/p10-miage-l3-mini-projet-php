@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Storage;
 
 class Dossier extends Model
 {
@@ -24,4 +25,29 @@ class Dossier extends Model
         return $this->belongsTo('App\Student');
     }
 
+    public function getNullFilesArray()
+    {
+        $res = array();
+        foreach ($this->toArray() as $key => $value)
+        {
+            if (preg_match('/^path_.*$/', $key) && $value === NULL)
+            {
+                $res[$key] = $value;
+            }
+        }
+        return $res;
+    }
+
+    public function getFilledFilesArray()
+    {
+        $res = array();
+        foreach ($this->toArray() as $key => $value)
+        {
+            if (preg_match('/^path_.*$/', $key) && $value != NULL)
+            {
+                $res[$key] = Storage::url($value);
+            }
+        }
+        return $res;
+    }
 }
