@@ -15,16 +15,18 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            
             $table->string('name')->nullable();
             $table->string('surname')->nullable();
             $table->string('num_student_card')->nullable();
             $table->date('birth_date')->nullable();
             $table->string('address')->nullable();
             $table->string('phone_number')->nullable();
-            $table->timestamps();
 
             $table->bigInteger('user_id')->unsigned()->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
