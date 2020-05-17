@@ -29,6 +29,10 @@ class HomeController extends Controller
             $users = User::all();
             return view('admin.users.index', compact('users'));
         }
+        elseif (auth()->user()->hasRole('enseignant'))
+        {
+            return redirect()->action('TeacherController@index');
+        }
         elseif (auth()->user()->hasRole('etudiant'))
         {
             return redirect()->action('StudentsController@index');
