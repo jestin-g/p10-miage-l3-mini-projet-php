@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use App\Student;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StudentsController extends Controller
 {
@@ -24,12 +24,28 @@ class StudentsController extends Controller
 
             if ($student->hasDossier())
             {
-                $data['dossier'] = $student->dossier;
+                $dossier = $student->dossier;
+                $data['dossier'] = $dossier;
+                $data['dossierNullFiles'] = $dossier->getNullFilesArray();
+                $data['dossierFilledFiles'] = $dossier->getFilledFilesArray();
+
+                foreach ($data['dossierFilledFiles'] as $key => $value)
+                {
+                    $value = Storage::url($value);
+                }
+
+                /* PAS DU TOUT PROPRE -> ERREURE DE CONCEPTION BDD */
+                $labels = array(
+                    'path_to_cv' => 'CV',
+                    'path_to_cover_letter' => 'Lettre de motivation',
+                    'path_to_transcript' => 'Relevé de notes (année dernière)',
+                    'path_to_print_screen_ent' => 'Capture d\'écran ENT (année en cours)',
+                    'path_to_registration_form' => 'Formulaire d\'inscription',
+                );
+                $data['files_labels'] = $labels;
             }
         }
-
             return view('student.index', $data);
-
     }
 
     /**
@@ -57,7 +73,7 @@ class StudentsController extends Controller
         
         $request->session()->flash('success', 'Votre profil  bien été créé, vous pouvez dès à présent renseigner vos informations dans la section \'Mon Profil\'');
 
-        return redirect()->action('StudentsController@index');
+        return redirect()->action('StudentsController@edit', $student);
     }
 
     /**
