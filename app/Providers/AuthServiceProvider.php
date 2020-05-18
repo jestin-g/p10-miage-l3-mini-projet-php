@@ -33,5 +33,8 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasRole('etudiant');
         });
 
+        Gate::define('manage-teachers', function($user){
+            return $user->hasRole('enseignant');
+        });
     }
 }
