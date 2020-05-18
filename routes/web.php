@@ -43,4 +43,7 @@ Route::name('')->middleware('can:manage-students')->group(function()
 Route::name('')->middleware('can:manage-teachers')->group(function()
 {
     Route::resource('/teacher', 'TeacherController', ['except' => ['create', 'show']]);
+    Route::get('/teacher/candidacy/{id}', 'TeacherController@showCandidacy')->name('candidacy.show');
+    Route::get('/teacher/candidacy/{id}/download', 'TeacherController@downloadZippedFolder')->name('candidacy.dossier.download');
+
 });
