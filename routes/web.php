@@ -37,5 +37,10 @@ Route::name('')->middleware('can:manage-students')->group(function()
     Route::post('students/dossier/file/upload', 'DossierController@uploadFile')->name('dossiers.uploadFile');
     Route::post('students/dossier/file/delete', 'DossierController@deleteFile')->name('dossiers.deleteFile');
 
-    Route::resource('/candidacy', 'CandidacyController', ['except' => ['create']]);
+    Route::resource('/candidacy', 'CandidacyController', ['only' => ['store']]);
+});
+
+Route::name('')->middleware('can:manage-teachers')->group(function()
+{
+    Route::resource('/teacher', 'TeacherController', ['except' => ['create', 'show']]);
 });
