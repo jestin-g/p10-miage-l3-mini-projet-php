@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Candidacy;
 use App\Dossier;
 use App\CandidacyStatus;
 use DB;
@@ -35,7 +36,13 @@ class TeacherController extends Controller
 
     public function updateCandidacy(Request $request, $id)
     {
+        $candidacy = Candidacy::find($id);
+        
+        $candidacy->candidacy_status_id = $request->status;
 
+        $candidacy->save();
+
+        return redirect()->route('candidacy.show', $id);
     }
 
     public function getAllCandidacies()
