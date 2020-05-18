@@ -9,15 +9,6 @@ use Illuminate\Http\Request;
 
 class CandidacyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return $candidacies = Candidacy::all();
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -37,59 +28,10 @@ class CandidacyController extends Controller
         ]);
 
         $candidacy->save();
-        auth()->user()->student->candidacy()->save($candidacy);
-
-        auth()->user()->student->candidacy->status()->save($status);
-
-        auth()->user()->student->candidacy->grade()->save($grade);
 
         $request->session()->flash('success', 'Votre candidature a bien été reçue !');
 
         return redirect()->action('StudentsController@index');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }
