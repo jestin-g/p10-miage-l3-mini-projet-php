@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dossier;
+use App\CandidacyStatus;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,10 +25,17 @@ class TeacherController extends Controller
         {
             $value = Storage::url($value);
         }
+        $statuses = CandidacyStatus::all();
         return view('teacher.one_candidacy', [
             'candidacy' => $candidacy,
             'dossier' => $dossier,
+            'statuses' => $statuses,
         ]);
+    }
+
+    public function updateCandidacy(Request $request, $id)
+    {
+
     }
 
     public function getAllCandidacies()
@@ -44,7 +52,7 @@ class TeacherController extends Controller
     public function getCandidacyById($id)
     {
         $candidacy = DB::table('candidacies')
-                           ->select('*', 'candidacies.id as candidacy_id', 'students.id as student_id', 'candidacy_grades.label as grade_label', 'candidacy_statuses.label as status_label')
+                           ->select('*', 'candidacies.id as candidacy_id', 'students.id as student_id', 'candidacy_grades.label as grade_label', 'candidacy_statuses.label as status_label', 'candidacy_statuses.id as status_id')
                            ->join('candidacy_grades', 'candidacies.candidadcy_grade_id', '=', 'candidacy_grades.id')
                            ->join('candidacy_statuses', 'candidacies.candidacy_status_id', '=', 'candidacy_statuses.id')
                            ->join('students', 'candidacies.student_id', '=', 'students.id')

@@ -40,8 +40,23 @@
                     </tbody>
                   </table>
                   @foreach ($dossier as $url)
-                <a href="{{ url($url) }}" class="btn btn-primary btn-block" role="button" target="_blank">Voir fichier n°{{ $loop->iteration }}</a>
+                <a href="{{ url($url) }}" class="btn btn-secondary btn-block" role="button" target="_blank">Voir fichier n°{{ $loop->iteration }}</a>
                   @endforeach
+            </div>
+            <div class="card-footer">
+                <form action="{{route('candidacy.update',[$candidacy->candidacy_id])}}" method="POST">
+                    @method('GET')
+                    @csrf
+                    <div class="form-group row">
+                        <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Statut') }}</label>
+                        <select id="status" name="status" class="custom-select col-md-6">
+                            @foreach ($statuses as $status)
+                                <option <?php if ($status->id == $candidacy->status_id) {echo ('selected="selected"');} ?> value="{{ $status->id }}">{{ $status->label }}</option>
+                            @endforeach
+                          </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn">Changer statut</button>               
+                </form>
             </div>
         </div>
         @endcan
