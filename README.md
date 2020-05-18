@@ -10,6 +10,8 @@ Application web Laravel permettant de gérer les candidatures à des formations
 Vérifier les pré-requis sur la documentation officiel de Laravel: [Documentation](https://laravel.com/docs/7.x/installation#installation)
 
 ## Installation
+> Installation vidéo: https://youtu.be/6yUrrESjZrM
+
 Cloner le dépôt
 
     git clone https://github.com/jestin-g/gestionnaire-groupes-php-l3-miage.git
