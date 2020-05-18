@@ -15,6 +15,7 @@ class CandidacyStatusesTableSeeder extends Seeder
     {
         CandidacyStatus::truncate();
         CandidacyStatus::create(['label' => 'reçu']);
+        CandidacyStatus::create(['label' => 'reçu en attente de validation des documents']);
         CandidacyStatus::create(['label' => 'reçu incomplet en attente de complément']);
         CandidacyStatus::create(['label' => 'validé complet']);
         CandidacyStatus::create(['label' => 'entretien']);

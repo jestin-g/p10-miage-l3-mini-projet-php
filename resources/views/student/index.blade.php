@@ -6,6 +6,7 @@
         @can('manage-students')
             @include('student.show')
             @include('student.dossier.show')
+            @include('student.candidacy.show')
         @endcan
     </div>
 </div>

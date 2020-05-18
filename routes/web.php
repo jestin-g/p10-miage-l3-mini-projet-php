@@ -36,4 +36,6 @@ Route::name('')->middleware('can:manage-students')->group(function()
     Route::post('students/dossier/init', 'DossierController@init')->name('dossiers.init');
     Route::post('students/dossier/file/upload', 'DossierController@uploadFile')->name('dossiers.uploadFile');
     Route::post('students/dossier/file/delete', 'DossierController@deleteFile')->name('dossiers.deleteFile');
+
+    Route::resource('/candidacy', 'CandidacyController', ['except' => ['create']]);
 });

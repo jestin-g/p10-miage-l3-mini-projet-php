@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\CandidacyGrade;
 use App\Http\Controllers\Controller;
 use App\Student;
 use App\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class StudentsController extends Controller
 {
-
+    /**
+     * Show the student's homepage with the corrects data
+     * 
+     */
     public function index()
     {
         $user = auth()->user();
@@ -34,7 +39,7 @@ class StudentsController extends Controller
                     $value = Storage::url($value);
                 }
 
-                /* PAS DU TOUT PROPRE -> ERREURE DE CONCEPTION BDD */
+                /* PAS DU TOUT PROPRE -> ERREURE DE CONCEPTION BDD (permet de traduire les types de fichiers pour le front) */
                 $labels = array(
                     'path_to_cv' => 'CV',
                     'path_to_cover_letter' => 'Lettre de motivation',
@@ -43,6 +48,22 @@ class StudentsController extends Controller
                     'path_to_registration_form' => 'Formulaire d\'inscription',
                 );
                 $data['files_labels'] = $labels;
+
+                $data['grades'] = CandidacyGrade::all();
+
+                if ($student->hasCandidacy())
+                {
+                    /* Je me suis emmêlé dans les relations de mes Model Eloquent et je n'ai plus le temps de tout corriger = requêtes avec le QueryBuilder pour récupérer le statuts de sa candidature.
+                     * Note à moi-même: Bien définir TOUTES ses tables et TOUTES leurs relations dès le début et TESTER TOUT (php tinker) avant de commencer quoi que ce soit.
+                     * https://laravel.com/docs/7.x/eloquent
+                    */
+                    $crappyQuery = DB::table('candidacies')
+                                       ->select('candidacy_statuses.label')
+                                       ->join('candidacy_statuses', 'candidacies.candidacy_status_id', '=', 'candidacy_statuses.id')
+                                       ->first();
+                    $data['candidacy_status'] = $crappyQuery->label;
+                    $data['candidacy'] = $student->candidacy;
+                }
             }
         }
             return view('student.index', $data);

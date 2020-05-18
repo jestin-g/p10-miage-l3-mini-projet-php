@@ -19,11 +19,11 @@ class CreateCandidaciesTable extends Migration
             $table->bigInteger('student_id')->unsigned()->unique();
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
 
-            $table->bigInteger('grade_id')->unsigned()->unique();
-            $table->foreign('grade_id')->references('id')->on('candidacy_grades')->onDelete('cascade');
+            $table->bigInteger('candidadcy_grade_id')->unsigned()->unique();
+            $table->foreign('candidadcy_grade_id')->references('id')->on('candidacy_grades')->onDelete('cascade');
 
-            $table->bigInteger('status_id')->unsigned()->unique();
-            $table->foreign('status_id')->references('id')->on('candidacy_statuses')->onDelete('cascade');
+            $table->bigInteger('candidacy_status_id')->unsigned()->unique();
+            $table->foreign('candidacy_status_id')->references('id')->on('candidacy_statuses')->onDelete('cascade');
 
             $table->timestamps();
         });
