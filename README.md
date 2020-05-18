@@ -2,11 +2,14 @@
 
 Application web Laravel permettant de gérer les candidatures à des formations
 
+## Pré-requis
+- Serveur (testé avec Apache)
+- SGBD (testé avec MySQL)
+- PHP (>= 7.2.5)
+
+Vérifier les pré-requis sur la documentation officiel de Laravel: [Documentation](https://laravel.com/docs/7.x/installation#installation)
+
 ## Installation
-
-Vérifier les pré-requis sur la documentation officiel de Laravel avant de commencer. [Documentation](https://laravel.com/docs/7.x/installation#installation)
-
-
 Cloner le dépôt
 
     git clone https://github.com/jestin-g/gestionnaire-groupes-php-l3-miage.git
