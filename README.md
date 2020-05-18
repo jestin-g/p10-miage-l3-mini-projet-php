@@ -2,10 +2,15 @@
 
 Application web Laravel permettant de gérer les candidatures à des formations
 
+## Pré-requis
+- Serveur (testé avec Apache)
+- SGBD (testé avec MySQL)
+- PHP (>= 7.2.5)
+
+Vérifier les pré-requis sur la documentation officiel de Laravel: [Documentation](https://laravel.com/docs/7.x/installation#installation)
+
 ## Installation
-
-Vérifier les pré-requis sur la documentation officiel de Laravel avant de commencer. [Documentation](https://laravel.com/docs/7.x/installation#installation)
-
+> Installation vidéo: https://youtu.be/6yUrrESjZrM
 
 Cloner le dépôt
 
