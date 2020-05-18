@@ -8,8 +8,8 @@ class CandidacyGrade extends Model
 {
     protected $fillable = ['label'];
 
-    public function candidacies()
-    {
-        return $this->belongsToMany('App\Candidacy');
-    }
+    // public function candidacies()
+    // {
+    //     return $this->belongsToMany('App\Candidacy');
+    // }
 }
